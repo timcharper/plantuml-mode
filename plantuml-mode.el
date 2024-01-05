@@ -139,7 +139,7 @@
 - `executable': run PlantUML as a bin executable. Requires `plantuml-executable-path'."
   :type 'symbol
   :group 'plantuml
-  :options '(jar server executable))
+  :options '(jar server server-pico executable))
 
 (defcustom plantuml-suppress-deprecation-warning t
   "To silence the deprecation warning when `puml-mode' is found upon loading."
@@ -197,7 +197,7 @@
 (defun plantuml-set-exec-mode (mode)
   "Set the execution mode MODE for PlantUML."
   (interactive (let* ((completion-ignore-case t)
-                      (supported-modes        '("jar" "server" "executable")))
+                      (supported-modes        '("jar" "server" "server-pico" "executable")))
                  (list (completing-read (format "Exec mode [%s]: " plantuml-exec-mode)
                                         supported-modes
                                         nil
@@ -205,7 +205,7 @@
                                         nil
                                         nil
                                         plantuml-exec-mode))))
-  (if (member mode '("jar" "server" "executable"))
+  (if (member mode '("jar" "server" "server-pico" "executable"))
       (setq plantuml-exec-mode (intern mode))
     (error (concat "Unsupported mode:" mode))))
 
